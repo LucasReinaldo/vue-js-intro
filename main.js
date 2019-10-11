@@ -14,6 +14,7 @@ Vue.component('product', {
         <h1>{{ title }}</h1>
         <p v-if="inStock">In Stock </p>
         <p v-else>Out of Stock</p>
+        <p>Shipping: {{ shipping }}</p>
 
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
@@ -27,9 +28,11 @@ Vue.component('product', {
         <button @click="addToCart"
                 :disabled="!inStock"
                 :class="{ disabledButton: !inStock}">Add to Cart</button>
-        <div class="cart">
-          <p>Cart: {{ cart }}</p>
-        </div>
+
+        <button class="btn btn-danger"
+                @click="removeFromCart"
+                :disabled="!inStock"
+                :class="{ disabledButton: !inStock}">Remove from Cart</button>
       </div>
     </div>
   `,
@@ -58,7 +61,10 @@ Vue.component('product', {
   },
   methods: {
     addToCart: function () {
-      this.cart += 1
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
+    },
+    removeFromCart: function () {
+      this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId)
     },
     updateProduct(index) {
       this.selectedVariant = index
@@ -75,12 +81,30 @@ Vue.component('product', {
     inStock() {
       return this.variants[this.selectedVariant].variantQuantity
     },
+    shipping() {
+      if (this.premium) {
+        return "Free"
+      } else {
+        return "$" + 3.99
+      }
+    },
   }
 })
 
 var app = new Vue({
   el: '#app',
   data: {
-    premium: true,
+    premium: false,
+    cart: [],
   },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id)
+    },
+    //remove last item from cart
+    removeFromCart(id) {
+      var arr = this.cart.indexOf(id)
+      this.cart.splice(arr, 1)
+    }
+  }
 })
