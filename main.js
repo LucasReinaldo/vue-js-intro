@@ -25,35 +25,38 @@ Vue.component('product', {
             :style="{ backgroundColor: variant.variantColor }"
             @mouseover="updateProduct(index)">
         </div>
+        <div>
         <button @click="addToCart"
                 :disabled="!inStock"
-                :class="{ disabledButton: !inStock}">Add to Cart</button>
-
+                :class="{ disabledButton: !inStock}">Add to Cart
+        </button>
         <button class="danger"
                 @click="removeFromCart"
                 :disabled="!inStock"
-                :class="{ disabledButton: !inStock}">Remove from Cart</button>
+                :class="{ disabledButton: !inStock}">Remove from Cart
+        </button>
+        </div>
       </div>
     </div>
   `,
   data() {
     return {
-      product: 'Changing Images',
-      brand: 'Testing:',
+      product: 'Tradicional and Strong',
+      brand: 'Coffee:',
       //image: 'assets/criativity.png', (replaced for the next line)
       selectedVariant: 0,
       // inStock: true, (replaced by inStock() method)
-      details: ["80% cotton", "20% polyester", "Gender-neutral"],
+      details: ["80% arabica", "20% dark", "french blend"],
       variants: [{
         variantId: 2234,
         variantColor: "Orange",
-        variantImage: 'assets/criativity.png',
+        variantImage: 'assets/coffee3.png',
         variantQuantity: 10
       },
       {
         variantId: 2235,
         variantColor: "Red",
-        variantImage: 'assets/food.jpg',
+        variantImage: 'assets/coffee2.png',
         variantQuantity: 5
       }],
       cart: 0
