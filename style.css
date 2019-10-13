@@ -56,6 +56,10 @@ body {
     font-size: 14px;
   }
 
+  button.danger {
+    background-color: red;
+  }
+
   .disabledButton {
     background-color: #d8d8d8;
   }

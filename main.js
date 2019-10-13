@@ -29,7 +29,7 @@ Vue.component('product', {
                 :disabled="!inStock"
                 :class="{ disabledButton: !inStock}">Add to Cart</button>
 
-        <button class="btn btn-danger"
+        <button class="danger"
                 @click="removeFromCart"
                 :disabled="!inStock"
                 :class="{ disabledButton: !inStock}">Remove from Cart</button>
@@ -54,7 +54,7 @@ Vue.component('product', {
         variantId: 2235,
         variantColor: "Red",
         variantImage: 'assets/food.jpg',
-        variantQuantity: 0
+        variantQuantity: 5
       }],
       cart: 0
     }
